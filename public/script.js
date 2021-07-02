@@ -128,10 +128,16 @@ const setStopVideo = () => {
 }
 
 const setPlayVideo = () => {
-  const html = `
-  <i class="stop fas fa-video-slash"></i>
+  const html = `<i class="stop fas fa-video-slash"></i>
     <span>Play Video</span>
   `
   document.querySelector('.main__video_button').innerHTML = html;
 }
 
+const inviteButton = document.querySelector("#inviteButton");
+inviteButton.addEventListener("click", (e) => {
+  prompt(
+    "Copy this link and send it to people you want to meet with",
+    window.location.href
+  );
+});
