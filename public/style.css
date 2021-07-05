@@ -118,8 +118,6 @@
 .main__right {
     display: flex;
     flex-direction: column;
-    flex: 0.3;
-    background-color: #242f41;
 }
 
 .main__chat_window {
@@ -196,7 +194,24 @@
     color: #fff;
   }
   
- 
+  @media (max-width: 700px) {
+    .main__right {
+      display: none;
+    }
+    .main__left {
+      width: 100%;
+      flex: 1;
+    }
+  
+    video {
+      height: auto;
+      width: 100%;
+    }
+  
+    #showChat {
+      display: flex;
+    }
+  }
 .leave_meeting {
     color: #EB534B;
 }
