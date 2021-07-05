@@ -173,6 +173,74 @@ socket.on("createMessage", (message, userName) => {
     </div>`;
 });
 
+// share screen
+const shareScreenBtn = document.getElementById("share-screen");
+shareScreenBtn.addEventListener("click", (e) => {
+    if (e.target.classList.contains("true")) return;
+    e.target.setAttribute("tool_tip", "You are already presenting screen");
+    e.target.classList.add("true");
+    navigator.mediaDevices
+        .getDisplayMedia({
+            video: true,
+            audio: {
+                echoCancellation: true,
+                noiseSuppression: true,
+                sampleRate: 44100,
+            },
+        })
+        .then((stream) => {
+            var videoTrack = stream.getVideoTracks()[0];
+            myVideoTrack = myVideoStream.getVideoTracks()[0];
+            replaceVideoTrack(myVideoStream, videoTrack);
+            for (peer in peers) {
+                let sender = peers[peer].peerConnection
+                    .getSenders()
+                    .find(function (s) {
+                        return s.track.kind == videoTrack.kind;
+                    });
+                sender.replaceTrack(videoTrack);
+            }
+            const elementsWrapper = document.querySelector(".elements-wrapper");
+            const stopBtn = document.createElement("button");
+            stopBtn.classList.add("video-element");
+            stopBtn.classList.add("stop-presenting-button");
+            stopBtn.innerHTML = "Stop Sharing";
+            elementsWrapper.classList.add("screen-share");
+            elementsWrapper.appendChild(stopBtn);
+            videoTrack.onended = () => {
+                elementsWrapper.classList.remove("screen-share");
+                stopBtn.remove();
+                stopPresenting(videoTrack);
+            };
+            stopBtn.onclick = () => {
+                videoTrack.stop();
+                elementsWrapper.classList.remove("screen-share");
+                stopBtn.remove();
+                stopPresenting(videoTrack);
+            };
+        });
+});
+
+const stopPresenting = (videoTrack) => {
+    shareScreenBtn.classList.remove("true");
+    shareScreenBtn.setAttribute("tool_tip", "Present Screen");
+    for (peer in peers) {
+        let sender = peers[peer].peerConnection.getSenders().find(function (s) {
+            return s.track.kind == videoTrack.kind;
+        });
+        sender.replaceTrack(myVideoTrack);
+    }
+    replaceVideoTrack(myVideoStream, myVideoTrack);
+};
+
+const crossBtnClickEvent = (e) => {
+    const videoWrapper = e.target.parentElement;
+    if (videoWrapper.classList.contains("zoom-video")) {
+        videoWrapper.classList.remove("zoom-video");
+        e.target.removeEventListener("click", crossBtnClickEvent);
+        e.target.remove();
+    }
+};
 
 
 
