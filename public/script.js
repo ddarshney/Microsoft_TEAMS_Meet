@@ -1,15 +1,23 @@
 
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-const myPeer = new Peer(undefined, {
+const showChat = document.querySelector("#showChat");
+const backBtn = document.querySelector(".header__back");
+
+const user = prompt("Enter your name");
+
+var myPeer = new Peer(user, {
   path: '/peerjs',
   host: '/',
   port: '443'
 })
+
+
 let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
-const peers = {}
+
+var peers = {}
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
@@ -28,20 +36,8 @@ navigator.mediaDevices.getUserMedia({
     setTimeout(() => connectToNewUser(userId, stream),3000)
     
   })
-  // input value
-  let text = $("input");
-  // when press enter send message
-  $('html').keydown(function (e) {
-    if (e.which == 13 && text.val().length !== 0) {
-      socket.emit('message', text.val());
-      text.val('')
-    }
-  });
-  socket.on("createMessage", message => {
-    $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
-    scrollToBottom()
-  })
-})
+
+});
 
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
@@ -72,13 +68,24 @@ function addVideoStream(video, stream) {
   videoGrid.append(video)
 }
 
+// input value
+let text = document.querySelector("#chat_message");
+let send = document.getElementById("send");
+let messages = document.querySelector(".messages");
 
+send.addEventListener("click", (e) => {
+  if (text.value.length !== 0) {
+    socket.emit("message", text.value);
+    text.value = "";
+  }
+});
 
-const scrollToBottom = () => {
-  var d = $('.main__chat_window');
-  d.scrollTop(d.prop("scrollHeight"));
-}
-
+text.addEventListener("keydown", (e) => {
+  if (e.key === "Enter" && text.value.length !== 0) {
+    socket.emit("message", text.value);
+    text.value = "";
+  }
+});
 
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
@@ -141,3 +148,19 @@ inviteButton.addEventListener("click", (e) => {
     window.location.href
   );
 });
+
+socket.on("createMessage", (message, userName) => {
+  messages.innerHTML =
+    messages.innerHTML +
+    `<div class="message">
+        <b><i class="far fa-user-circle"></i> <span> ${
+          userName === user ? "me" : userName }
+          </span> </b>
+        <span>${message}</span>
+    </div>`;
+});
+
+
+
+
+
