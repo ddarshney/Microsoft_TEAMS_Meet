@@ -4,7 +4,7 @@ const videoGrid = document.getElementById('video-grid')
 const showChat = document.querySelector("#showChat");
 const backBtn = document.querySelector(".header__back");
 
-const user = prompt("Enter your name");
+
 
 const myPeer = new Peer(undefined, {
   path: '/peerjs',
@@ -17,7 +17,7 @@ let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
 
-var peers = {}
+const peers = {}
 navigator.mediaDevices.getUserMedia({
   video: true,
   audio: true
@@ -36,6 +36,19 @@ navigator.mediaDevices.getUserMedia({
     setTimeout(() => connectToNewUser(userId, stream),3000)
     
   })
+   // input value
+   let text = $("input");
+   // when press enter send message
+   $('html').keydown(function (e) {
+     if (e.which == 13 && text.val().length !== 0) {
+       socket.emit('message', text.val());
+       text.val('')
+     }
+   });
+   socket.on("createMessage", message => {
+     $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
+     scrollToBottom()
+   })
 
 });
 
