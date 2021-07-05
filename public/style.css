@@ -54,7 +54,9 @@
     margin: 0.5rem;
     width: 400px;
     object-fit: cover;
-    
+    transform: rotateY(180deg);
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
   }
 .main__right {
     flex: 0.2
