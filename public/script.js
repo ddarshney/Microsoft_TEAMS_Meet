@@ -242,6 +242,59 @@ const crossBtnClickEvent = (e) => {
     }
 };
 
+const recordingBtn = document.getElementById("recording-toggle");
+const chunks = [];
+var recorder;
+recordingBtn.addEventListener("click", (e) => {
+    const currentElement = e.target;
+    const indicator = document.querySelector(".recording-indicator");
+
+    // recording start
+    if (indicator == null) {
+        currentElement.setAttribute("tool_tip", "Stop Recording");
+        currentElement.classList.add("tooltip-danger");
+        currentElement.classList.add("blink");
+        const recordingElement = document.createElement("div");
+        recordingElement.classList.add("recording-indicator");
+        recordingElement.innerHTML = `<div></div>`;
+        myVideo.previousSibling.appendChild(recordingElement);
+        // recording
+        record(myVideoStream);
+        recorder.start(1000);
+    }
+    // recording stop
+    else {
+        const completeBlob = new Blob(chunks, { type: chunks[0].type });
+        var anchor = document.createElement("a");
+        document.body.appendChild(anchor);
+        anchor.style = "display: none";
+        var url = window.URL.createObjectURL(completeBlob);
+        anchor.href = url;
+        anchor.download = `aaaa.mp4`;
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+        recorder.stop();
+        currentElement.setAttribute("tool_tip", "Start Recording");
+        currentElement.classList.remove("tooltip-danger");
+        currentElement.classList.remove("blink");
+        indicator.remove();
+        while (chunks.length) {
+            chunks.pop();
+        }
+    }
+});
+
+const record = (stream) => {
+    recorder = new MediaRecorder(stream, {
+        mineType: "video/webm;codecs=H264",
+    });
+    recorder.onstop = (e) => {
+        delete recorder;
+    };
+    recorder.ondataavailable = (e) => {
+        chunks.push(e.data);
+    };
+};
 
 
 
