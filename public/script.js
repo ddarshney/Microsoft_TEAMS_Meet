@@ -233,6 +233,7 @@ const stopPresenting = (videoTrack) => {
     replaceVideoTrack(myVideoStream, myVideoTrack);
 };
 
+
 const crossBtnClickEvent = (e) => {
     const videoWrapper = e.target.parentElement;
     if (videoWrapper.classList.contains("zoom-video")) {
@@ -240,6 +241,11 @@ const crossBtnClickEvent = (e) => {
         e.target.removeEventListener("click", crossBtnClickEvent);
         e.target.remove();
     }
+};
+
+const replaceVideoTrack = (stream, videoTrack) => {
+  stream.removeTrack(stream.getVideoTracks()[0]);
+  stream.addTrack(videoTrack);
 };
 
 const recordingBtn = document.getElementById("recording-toggle");
@@ -296,5 +302,56 @@ const record = (stream) => {
     };
 };
 
+class SE {
+    constructor(mediaStream) {
+        this.mediaStream = mediaStream;
+    }
+    createElement() {
+        this.element = document.createElement("div");
+        this.element.classList.add("effect-container");
+        const a1 = document.createElement("div");
+        a1.classList.add("o1");
+        const a2 = document.createElement("div");
+        a2.classList.add("o2");
+        const a3 = document.createElement("div");
+        a3.classList.add("o1");
+        this.element.appendChild(a1);
+        this.element.appendChild(a2);
+        this.element.appendChild(a3);
 
+        this.audioCTX = new AudioContext();
+        this.analyser = this.audioCTX.createAnalyser();
+        console.log(this.audioCTX);
+        const source = this.audioCTX.createMediaStreamSource(this.mediaStream);
+        source.connect(this.analyser);
+
+        const frameLoop = () => {
+            window.requestAnimationFrame(frameLoop);
+            let fbc_array = new Uint8Array(this.analyser.frequencyBinCount);
+            this.analyser.getByteFrequencyData(fbc_array);
+            let o1 = fbc_array[20] / 300;
+            let o2 = fbc_array[50] / 200;
+            o1 = o1 < 0.5 ? 0.19 : o1 > 1 ? 1 : o1;
+            o2 = o2 < 0.4 ? 0.19 : o2 > 1 ? 1 : o2;
+            a1.style.height = `${o1 * 100}%`;
+            a3.style.height = `${o1 * 100}%`;
+            a2.style.height = `${o2 * 100}%`;
+        };
+        frameLoop();
+        return this.element;
+    }
+    replaceStream(stream) {
+        this.mediaStream = stream;
+        this.audioCTX.close().then((e) => {
+            console.log("audiCTX close");
+        });
+        this.element = this.createElement();
+    }
+    deleteElement() {
+        this.audioCTX.close().then((e) => {
+            console.log("audiCTX close");
+        });
+        this.element.remove();
+    }
+}
 
