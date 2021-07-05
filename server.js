@@ -33,7 +33,7 @@ io.on('connection', socket => {
       //send message to the same room
      
 socket.on("message", (message) => {
-    socket.to(roomId).emit("createMessage", message, userName);
+    socket.to(roomId).emit("createMessage", message);
   });
 
     socket.on('disconnect', () => {
