@@ -6,7 +6,7 @@ const backBtn = document.querySelector(".header__back");
 
 const user = prompt("Enter your name");
 
-var myPeer = new Peer(user, {
+const myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
   port: '443'
