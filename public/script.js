@@ -8,7 +8,7 @@ const backBtn = document.querySelector(".header__back");
 var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '8569'
+  port: '443'
 })
 
 var name= prompt("whats your name","user");
