@@ -5,13 +5,13 @@ const showChat = document.querySelector("#showChat");
 const backBtn = document.querySelector(".header__back");
 
 
-
-const myPeer = new Peer(undefined, {
+var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
   port: '443'
 })
 
+var name= prompt("whats your name","user");
 
 let myVideoStream;
 const myVideo = document.createElement('video')
@@ -34,22 +34,7 @@ navigator.mediaDevices.getUserMedia({
 
   socket.on('user-connected', userId => {
     setTimeout(() => connectToNewUser(userId, stream),3000)
-    
   })
-   // input value
-   let text = $("input");
-   // when press enter send message
-   $('html').keydown(function (e) {
-     if (e.which == 13 && text.val().length !== 0) {
-       socket.emit('message', text.val());
-       text.val('')
-     }
-   });
-   socket.on("createMessage", message => {
-     $("ul").append(`<li class="message"><b>user</b><br/>${message}</li>`);
-     scrollToBottom()
-   })
-
 });
 
 socket.on('user-disconnected', userId => {
@@ -81,24 +66,38 @@ function addVideoStream(video, stream) {
   videoGrid.append(video)
 }
 
-// input value
-let text = document.querySelector("#chat_message");
-let send = document.getElementById("send");
-let messages = document.querySelector(".messages");
+  // getting the name of user so that it can be used in chat
+var text= $('input') ;
+// jquery function to send the message to all the peers when enter is pressed on keyboard
+$('html').keydown((e)=> {
+        if(e.which==13 && text.val().length!==0) {   // 13 is used because numeric value for enter is 13
+            socket.emit('message', text.val(), name) ;
+            text.val('')  // resetting the text typed to blank
+        }
+})
+  
+// adding the message on chat window with the name of sender
+ socket.on('createmsg', (msg,name)=> {
+        $('ul').append(`<li class="message"><b>${name}</b><br/>${msg}</li>`)
+        scrollbottom() ;  // to scroll till last msg in chat window
+    })
+    
+// function to scroll the chat window till bottom every time a message is added 
+const scrollbottom=() => {
+    let d= $('.chat_window') ;
+    d.scrollTop(d.prop("scrollHeight")) ;
+
+}
+
+
 
 send.addEventListener("click", (e) => {
   if (text.value.length !== 0) {
     socket.emit("message", text.value);
     text.value = "";
   }
-});
+}); 
 
-text.addEventListener("keydown", (e) => {
-  if (e.key === "Enter" && text.value.length !== 0) {
-    socket.emit("message", text.value);
-    text.value = "";
-  }
-});
 
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
@@ -154,6 +153,11 @@ const setPlayVideo = () => {
   document.querySelector('.main__video_button').innerHTML = html;
 }
 
+const scrollToBottom = () => {
+  var d = $('.main__chat_window');
+  d.scrollTop(d.prop("scrollHeight"));
+}
+
 const inviteButton = document.querySelector("#inviteButton");
 inviteButton.addEventListener("click", (e) => {
   prompt(
@@ -162,16 +166,7 @@ inviteButton.addEventListener("click", (e) => {
   );
 });
 
-socket.on("createMessage", (message, userName) => {
-  messages.innerHTML =
-    messages.innerHTML +
-    `<div class="message">
-        <b><i class="far fa-user-circle"></i> <span> ${
-          userName === user ? "me" : userName }
-          </span> </b>
-        <span>${message}</span>
-    </div>`;
-});
+
 
 // share screen
 const shareScreenBtn = document.getElementById("share-screen");
@@ -247,7 +242,6 @@ const replaceVideoTrack = (stream, videoTrack) => {
   stream.removeTrack(stream.getVideoTracks()[0]);
   stream.addTrack(videoTrack);
 };
-
 
        
 

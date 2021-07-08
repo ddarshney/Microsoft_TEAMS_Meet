@@ -5,13 +5,16 @@ const app = express()
 
 const server = require('http').Server(app)
 const io = require('socket.io')(server)
+
 const { ExpressPeerServer } = require('peer');
 const peerServer = ExpressPeerServer(server, {
   debug: true
 });
 const { v4: uuidV4 } = require('uuid')
 
+
 app.use('/peerjs', peerServer);
+
 
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
@@ -32,9 +35,9 @@ io.on('connection', socket => {
     
       //send message to the same room
      
-socket.on("message", (message) => {
-    socket.to(roomId).emit("createMessage", message);
-  });
+      socket.on('message', (msg,name) => {
+        io.to(roomId).emit('createmsg', msg,name)
+    })
 
     socket.on('disconnect', () => {
       socket.to(roomId).emit('user-disconnected', userId)
