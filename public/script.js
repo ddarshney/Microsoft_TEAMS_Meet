@@ -5,7 +5,7 @@ const showChat = document.querySelector("#showChat");
 const backBtn = document.querySelector(".header__back");
 
 
-var myPeer = new Peer(undefined, {
+const myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
   port: '443'
