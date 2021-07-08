@@ -5,10 +5,10 @@ const showChat = document.querySelector("#showChat");
 const backBtn = document.querySelector(".header__back");
 
 
-const myPeer = new Peer(undefined, {
+var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443'
+  port: '8569'
 })
 
 var name= prompt("whats your name","user");
