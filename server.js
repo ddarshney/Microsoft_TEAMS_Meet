@@ -52,6 +52,7 @@ io.on('connection', socket => {
       //send raised hand emoji to the same room
       io.to(roomId).emit('raiseHand', username)
     });
+    
 
     socket.on('disconnect', () => {
       socket.to(roomId).emit('user-disconnected', userId)

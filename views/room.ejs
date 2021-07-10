@@ -20,31 +20,13 @@
   
 </head>
 <body>
-   <div class="custom-modal" id='recording-options-modal'>
-      <div class="custom-modal-content">
-          <div class="row text-center">
-              <div class="col-md-6 mb-2">
-                  <span class="record-option" id='record-video'>Record video</span>
-              </div>
-              <div class="col-md-6 mb-2">
-                  <span class="record-option" id='record-screen'>Record screen</span>
-              </div>
-          </div>
-
-          <div class="row mt-3">
-              <div class="col-md-12 text-center">
-                  <button class="btn btn-outline-danger" id='closeModal'>Close</button>
-              </div>
-          </div>
-      </div>
-  </div>
-   <div class="header">
+     <div class="header">
       <div class="logo">
          <div class="header__back">
             <i class="fas fa-angle-left"></i>
           </div>
         
-        <h3> Microsoft Teams Meet : Connect with others</h3>
+        <h3> Microsoft Teams Meet : Let's Connect</h3>
       </div>
      </div>
    <div class="main">
@@ -71,12 +53,6 @@
             </div>
             <div class="main__controls__block">
                <div class="main__controls__button">
-                  <i class="fa fa-dot-circle text-white"></i>
-                  <div id="recording-toggle" class="main__controls__button">
-                  <span >Record</span>
-               </div>
-               </div>
-               <div class="main__controls__button">
                   <i class="fa fa-desktop text-white"></i>
                   <div id="share-screen" class="main__controls__button" >
                   <span>Share screen</span>
@@ -95,21 +71,19 @@
                  </div>
                </div>
             </div>
-            <div class="main__controls__block">
-               <div class="main__controls__button">
-                  
-                  <div onclick="exit()" class="main__controls__button main__exit_button" id="leaveButtton">
-                  <span class="leave_meeting">Leave Meeting</span>
-                </div>
+               <div class="main__controls__block">
+                  <div id="exit_button" class="main__controls__button">
+                     <i class="bi bi-telephone-x-fill"></i>
+                     <span class="leave_meeting">Hang Up</span>
+                  </div>
                </div>
-               
-            </div>
+           
          </div>
       </div>
       
       <div class="main__right">
          <div class="main__header">
-            <h6>Chat</h6>
+            <h5>Chat Room</h5>
          </div>
          <div class="main__chat_window">
            

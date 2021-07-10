@@ -8,10 +8,10 @@ const videoGrid = document.getElementById('video-grid')
 var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443'
+  port: '8569',
 })
 
-var username= prompt("whats your name","user");
+var username= prompt("Please enter your name....","user");
 socket.emit('new-user', username)
 //user is prompted to give hs name
 // getting the name of user so that it can be used in chat
@@ -84,9 +84,11 @@ function addVideoStream(video, stream) {
 var text= $('input') ;
 // jquery function to send the message to all the peers when enter is pressed on keyboard
 $('html').keydown((e)=> {
-        if(e.which==13 && text.val().length!==0) {   // 13 is used because numeric value for enter is 13
+        if(e.which==13 && text.val().length!==0) {  
+           // numeric value for enter is 13
             socket.emit('message', text.val(), username) ;
-            text.val('')  // resetting the text typed to blank
+            text.val('') 
+            // resetting the text typed to blank
         }
 })
   
@@ -95,7 +97,7 @@ $('html').keydown((e)=> {
         $('ul').append(`<li class="message"><b>${username}</b><br/>${msg}</li>`)
         scrollbottom() ;  // to scroll till last msg in chat window
     })
-    
+     
 // function to scroll the chat window till bottom every time a message is added 
 const scrollbottom=() => {
     let d= $('.chat_window') ;
@@ -103,7 +105,7 @@ const scrollbottom=() => {
 
 }
 
-// Setting the functions of mute or unmute audio buttons
+// Setting the functions of mute or unmute audio buttons when mute button is clicked
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
   if (enabled) {
@@ -116,7 +118,7 @@ const muteUnmute = () => {
 }
 
 
-// Setting the functions of play or stop video buttons
+// Setting the functions of play or stop video buttons when the video button is clicked
 const playStop = () => {
   console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
@@ -166,7 +168,7 @@ const scrollToBottom = () => {
 }
 
 
-//adding invite link button
+// runs when the invite link button is clicked
 const inviteButton = document.querySelector("#inviteButton");
 inviteButton.addEventListener("click", (e) => {
   prompt(
@@ -177,7 +179,7 @@ inviteButton.addEventListener("click", (e) => {
 
 
 
-// share screen
+//  executed when the share screen button is clicked
 const shareScreenBtn = document.getElementById("share-screen");
 shareScreenBtn.addEventListener("click", (e) => {
     if (e.target.classList.contains("true")) return;
@@ -237,20 +239,21 @@ const stopPresenting = (videoTrack) => {
     replaceVideoTrack(myVideoStream, myVideoTrack);
 };
 
-
 const crossBtnClickEvent = (e) => {
-    const videoWrapper = e.target.parentElement;
-    if (videoWrapper.classList.contains("zoom-video")) {
-        videoWrapper.classList.remove("zoom-video");
-        e.target.removeEventListener("click", crossBtnClickEvent);
-        e.target.remove();
-    }
+  const videoWrapper = e.target.parentElement;
+  if (videoWrapper.classList.contains("zoom-video")) {
+      videoWrapper.classList.remove("zoom-video");
+      e.target.removeEventListener("click", crossBtnClickEvent);
+      e.target.remove();
+  }
 };
-
+// replacing your video stream with the scared screen stream
 const replaceVideoTrack = (stream, videoTrack) => {
   stream.removeTrack(stream.getVideoTracks()[0]);
   stream.addTrack(videoTrack);
 };
+
+
 
 // Leaving the videocall meet
 function leave(){
@@ -259,162 +262,10 @@ function leave(){
   localStream.getAudioTracks()[0].enabled = false;
   localStream.getVideoTracks()[0].enabled = false;
   stream.removeTrack(stream.getVideoTracks()[0]);
-
 }       
 
 
-//When record button is clicked
-document.getElementById( 'record' ).addEventListener( 'click', ( e ) => {
-  /**
-   * Ask user what they want to record.
-   * Get the stream based on selection and start recording
-   */
-  if ( !mediaRecorder || mediaRecorder.state == 'inactive' ) {
-      h.toggleModal( 'recording-options-modal', true );
-  }
-
-  else if ( mediaRecorder.state == 'paused' ) {
-      mediaRecorder.resume();
-  }
-
-  else if ( mediaRecorder.state == 'recording' ) {
-      mediaRecorder.stop();
-  }
-} );
-
-
-//When user choose to record screen
-document.getElementById( 'record-screen' ).addEventListener( 'click', () => {
-  h.toggleModal( 'recording-options-modal', false );
-
-  if ( screen && screen.getVideoTracks().length ) {
-      startRecording( screen );
-  }
-
-  else {
-      h.shareScreen().then( ( screenStream ) => {
-          startRecording( screenStream );
-      } ).catch( () => { } );
-  }
-} );
-
-
-//When user choose to record own video
-document.getElementById( 'record-video' ).addEventListener( 'click', () => {
-  h.toggleModal( 'recording-options-modal', false );
-
-  if ( myStream && myStream.getTracks().length ) {
-      startRecording( myStream );
-  }
-
-  else {
-      h.getUserFullMedia().then( ( videoStream ) => {
-          startRecording( videoStream );
-      } ).catch( () => { } );
-  }
-}) 
-
-
-function toggleRecordingIcons( isRecording ) {
-  let e = document.getElementById( 'record' );
-
-  if ( isRecording ) {
-      e.setAttribute( 'title', 'Stop recording' );
-      e.children[0].classList.add( 'text-danger' );
-      e.children[0].classList.remove( 'text-white' );
-  }
-
-  else {
-      e.setAttribute( 'title', 'Record' );
-      e.children[0].classList.add( 'text-white' );
-      e.children[0].classList.remove( 'text-danger' );
-  }
-}
-
-
-function startRecording( stream ) {
-  mediaRecorder = new MediaRecorder( stream, {
-      mimeType: 'video/webm;codecs=vp9'
-  } );
-
-  mediaRecorder.start( 1000 );
-  toggleRecordingIcons( true );
-
-  mediaRecorder.ondataavailable = function ( e ) {
-      recordedStream.push( e.data );
-  };
-
-  mediaRecorder.onstop = function () {
-      toggleRecordingIcons( false );
-
-      h.saveRecordedStream( recordedStream, username );
-
-      setTimeout( () => {
-          recordedStream = [];
-      }, 3000 );
-  };
-
-  mediaRecorder.onerror = function ( e ) {
-      console.error( e );
-  };
-}
-
-const recordingBtn = document.getElementById("recording-toggle");
-const chunks = [];
-var recorder;
-recordingBtn.addEventListener("click", (e) => {
-    const currentElement = e.target;
-    const indicator = document.querySelector(".recording-indicator");
-
-    // recording start
-    if (indicator == null) {
-        currentElement.setAttribute("tool_tip", "Stop Recording");
-        currentElement.classList.add("tooltip-danger");
-        currentElement.classList.add("blink");
-        const recordingElement = document.createElement("div");
-        recordingElement.classList.add("recording-indicator");
-        recordingElement.innerHTML = `<div></div>`;
-        myVideo.previousSibling.appendChild(recordingElement);
-        // recording
-        record(myVideoStream);
-        recorder.start(1000);
-    }
-    // recording stop
-    else {
-        const completeBlob = new Blob(chunks, { type: chunks[0].type });
-        var anchor = document.createElement("a");
-        document.body.appendChild(anchor);
-        anchor.style = "display: none";
-        var url = window.URL.createObjectURL(completeBlob);
-        anchor.href = url;
-        anchor.download = `aaaa.mp4`;
-        anchor.click();
-        window.URL.revokeObjectURL(url);
-        recorder.stop();
-        currentElement.setAttribute("tool_tip", "Start Recording");
-        currentElement.classList.remove("tooltip-danger");
-        currentElement.classList.remove("blink");
-        indicator.remove();
-        while (chunks.length) {
-            chunks.pop();
-        }
-    }
-});
-
-const record = (stream) => {
-    recorder = new MediaRecorder(stream, {
-        mineType: "video/webm;codecs=H264",
-    });
-    recorder.onstop = (e) => {
-        delete recorder;
-    };
-    recorder.ondataavailable = (e) => {
-        chunks.push(e.data);
-    };
-};
-
 //raise hand
-
 const raiseHand = document.getElementById("raiseHand");
   raiseHand.addEventListener("click", (e) => {
   //emit through socket when button is clicked
@@ -427,16 +278,11 @@ socket.on('raiseHand', username =>{
     $('ul').append(`<li class="message"><b>${username}</b><br/>:✋</li>`)
 });
 
-//exit button 
-
-const exitButton = document.querySelector('.main__exit_button');
+//when exit button is clicked 
+const exitButton = document.querySelector("#exit_button");
 
 exitButton.addEventListener("click", (e) => {
-  //window.close();
-  //process.exit()
-  //open(location, '_self').close();
-  if(confirm("Are you sure?")){
-  var win = window.open("leave.html", "_self");
-  win.close();
+  window.close();
+  process.exit()
   }
-});
+);

@@ -13,37 +13,6 @@
     padding: 0;
 }
 
-.record-option {
-    height: 200px;
-    border-radius: 10%;
-    border: 1px solid #080d0e;
-    cursor: pointer;
-    padding: 10px;
-    vertical-align: middle;
-}
-
-
-.custom-modal {
-    display: none;
-    position: fixed;
-    z-index: 10000;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-}
-
-
-.custom-modal-content {
-    background-color: #21bb80;
-    margin: 15% auto;
-    padding: 20px;
-    border: 1px solid #62bbc9;
-    width: 80%;
-}
-
-
 @keyframes animatetop {
     from {
         top: -300px;
@@ -59,11 +28,11 @@
 .header {
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: left;
     height: 8vh;
     position: relative;
     width: 100%;
-    background-color:rgb(47, 62, 192) ;
+    background-color:rgb(109, 40, 187) ;
 }
 
 .logo>h3 {
@@ -73,7 +42,7 @@
 
 .main {
     overflow: hidden;
-    height: 100vh;
+    height: 120vh;
     display: flex;
 }
 
@@ -107,7 +76,7 @@ video {
 
 .main__videos {
     flex-grow: 1;
-    background-color: rgb(143, 201, 228);
+    background-color: #96a8e4;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -115,16 +84,16 @@ video {
 }
 
 .main__controls {
-    padding: 1rem;
+    padding: 0.5rem;
     display: flex;
-    background-color:rgb(62, 65, 224) ;
+    background-color:rgb(107, 38, 185) ;
 }
 
 .main__right {
     display: flex;
     flex-direction: column;
     flex: 0.3;
-    background-color: #4179f0;
+    background-color: #155bf1;
 }
 
 
@@ -132,7 +101,7 @@ video {
     color: #D2D2D2;
     display: flex;
     justify-content: space-between;
-    padding: 5px;
+    padding: 2px;
 }
 
 .main__controls__block {
@@ -150,12 +119,12 @@ video {
 }
 
 .main__controls__button:hover {
-    background-color: #f0e4e4;
+    background-color: #82cbdb;
     border-radius: 5px;
 }
 
 .main__controls__button i {
-    font-size: 24px;
+    font-size: 20px;
 }
 
 .main__right {
@@ -164,7 +133,7 @@ video {
 }
 
 .main__header {
-    padding-top: 5px;
+    padding-top: 20px;
     color: #F5F5F5;
     text-align: center;
 }
@@ -172,7 +141,7 @@ video {
 .main__chat_window {
     flex-grow: 1;
     overflow-y: auto;
-    background-color: #96a8e4;
+    background-color: #6775f1;
 }
 
 .messages {
@@ -183,17 +152,17 @@ video {
 }
 
 .main__message_container {
-    padding: 22px 12px;
+    padding: 16px 12px;
     display: flex;
 
 }
 
 .main__message_container input {
-    flex-grow: 10;
-    background-color: rgb(245, 245, 245);
+    flex-grow: 20;
+    background-color: rgb(247, 224, 224);
     border: none;
-    color: #f50303;
-    
+    color: #07367c;
+    padding: 12px 5px;
     
 }
 .main__exit_button {
@@ -235,5 +204,5 @@ video {
 
 .unmute,
 .stop {
-    color: #da2c2c;
+    color: #4feb76;
 }
