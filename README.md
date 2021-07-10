@@ -1,7 +1,7 @@
 # Microsoft_TEAMS_Meet
 
 
-Simple Web Application that offer you to create video meeting room using WebRTC and Socket
+A Web Application made during the Microsoft Engage Mentorship Programme that offer you to have a multi-user video conversation using WebRTC and Socket.io.
 
 ## Getting Started
 
@@ -19,8 +19,7 @@ After installing node clone the repo by using git
 git clone https://github.com/ddarshney/Microsoft_TEAMS_Meet.git
        
 ```
-
-Or you can download the zip file.
+Or you can also download the zip file.
 
 Then open cmd or git bash on the project folder to install some modules that I used to build this project
 
@@ -55,8 +54,7 @@ node server.js
 
 For deploy the project I use [heroku](https://heroku.com)
 
-[Video Chat](https://socialist-beaver-85154.herokuapp.com/)
-
+[Microsoft Meet Clone](https://microsoft-teams-meet.herokuapp.com)
 ## Built With
 
 -   [Node Js](https://nodejs.org/en/) - The Backend
