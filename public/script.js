@@ -247,7 +247,8 @@ const crossBtnClickEvent = (e) => {
       e.target.remove();
   }
 };
-// replacing your video stream with the scared screen stream
+
+// replacing your video stream with the shared screen stream
 const replaceVideoTrack = (stream, videoTrack) => {
   stream.removeTrack(stream.getVideoTracks()[0]);
   stream.addTrack(videoTrack);

@@ -76,7 +76,7 @@ video {
 
 .main__videos {
     flex-grow: 1;
-    background-color: #96a8e4;
+    background-color: #aebff7;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -141,7 +141,7 @@ video {
 .main__chat_window {
     flex-grow: 1;
     overflow-y: auto;
-    background-color: #6775f1;
+    background-color: #71adfc;
 }
 
 .messages {
