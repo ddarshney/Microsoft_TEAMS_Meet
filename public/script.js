@@ -1,17 +1,20 @@
+// Creating a client
 
 const socket = io('/')
 const videoGrid = document.getElementById('video-grid')
-const showChat = document.querySelector("#showChat");
-const backBtn = document.querySelector(".header__back");
+
 
 
 var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443'
+  port: '8569'
 })
 
-var name= prompt("whats your name","user");
+var username= prompt("whats your name","user");
+socket.emit('new-user', username)
+//user is prompted to give hs name
+// getting the name of user so that it can be used in chat
 
 let myVideoStream;
 const myVideo = document.createElement('video')
@@ -37,6 +40,13 @@ navigator.mediaDevices.getUserMedia({
   })
 });
 
+// Joining the video call meet and getting the user's audio, video
+function joinMeet(){
+  document.getElementById('meet').style.display = "flex";
+  document.getElementById('start').style.display = "none";
+}
+
+ // Disconnecting the user
 socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
 })
@@ -45,6 +55,8 @@ myPeer.on('open', id => {
   socket.emit('join-room', ROOM_ID, id)
 })
 
+
+//Connecting the user to videocall meet
 function connectToNewUser(userId, stream) {
   const call = myPeer.call(userId, stream)
   const video = document.createElement('video')
@@ -58,6 +70,7 @@ function connectToNewUser(userId, stream) {
   peers[userId] = call
 }
 
+// Adding the new user's stream to the video grid
 function addVideoStream(video, stream) {
   video.srcObject = stream
   video.addEventListener('loadedmetadata', () => {
@@ -66,19 +79,20 @@ function addVideoStream(video, stream) {
   videoGrid.append(video)
 }
 
-  // getting the name of user so that it can be used in chat
+// Taking the chat message input and displaying it to all clients
+
 var text= $('input') ;
 // jquery function to send the message to all the peers when enter is pressed on keyboard
 $('html').keydown((e)=> {
         if(e.which==13 && text.val().length!==0) {   // 13 is used because numeric value for enter is 13
-            socket.emit('message', text.val(), name) ;
+            socket.emit('message', text.val(), username) ;
             text.val('')  // resetting the text typed to blank
         }
 })
   
 // adding the message on chat window with the name of sender
- socket.on('createmsg', (msg,name)=> {
-        $('ul').append(`<li class="message"><b>${name}</b><br/>${msg}</li>`)
+ socket.on('createmsg', (msg,username)=> {
+        $('ul').append(`<li class="message"><b>${username}</b><br/>${msg}</li>`)
         scrollbottom() ;  // to scroll till last msg in chat window
     })
     
@@ -89,16 +103,7 @@ const scrollbottom=() => {
 
 }
 
-
-
-send.addEventListener("click", (e) => {
-  if (text.value.length !== 0) {
-    socket.emit("message", text.value);
-    text.value = "";
-  }
-}); 
-
-
+// Setting the functions of mute or unmute audio buttons
 const muteUnmute = () => {
   const enabled = myVideoStream.getAudioTracks()[0].enabled;
   if (enabled) {
@@ -110,6 +115,8 @@ const muteUnmute = () => {
   }
 }
 
+
+// Setting the functions of play or stop video buttons
 const playStop = () => {
   console.log('object')
   let enabled = myVideoStream.getVideoTracks()[0].enabled;
@@ -158,6 +165,8 @@ const scrollToBottom = () => {
   d.scrollTop(d.prop("scrollHeight"));
 }
 
+
+//adding invite link button
 const inviteButton = document.querySelector("#inviteButton");
 inviteButton.addEventListener("click", (e) => {
   prompt(
@@ -243,5 +252,191 @@ const replaceVideoTrack = (stream, videoTrack) => {
   stream.addTrack(videoTrack);
 };
 
-       
+// Leaving the videocall meet
+function leave(){
+  document.getElementById('meet').style.display = "none";
+  document.getElementById('start').style.display = "flex";
+  localStream.getAudioTracks()[0].enabled = false;
+  localStream.getVideoTracks()[0].enabled = false;
+  stream.removeTrack(stream.getVideoTracks()[0]);
 
+}       
+
+
+//When record button is clicked
+document.getElementById( 'record' ).addEventListener( 'click', ( e ) => {
+  /**
+   * Ask user what they want to record.
+   * Get the stream based on selection and start recording
+   */
+  if ( !mediaRecorder || mediaRecorder.state == 'inactive' ) {
+      h.toggleModal( 'recording-options-modal', true );
+  }
+
+  else if ( mediaRecorder.state == 'paused' ) {
+      mediaRecorder.resume();
+  }
+
+  else if ( mediaRecorder.state == 'recording' ) {
+      mediaRecorder.stop();
+  }
+} );
+
+
+//When user choose to record screen
+document.getElementById( 'record-screen' ).addEventListener( 'click', () => {
+  h.toggleModal( 'recording-options-modal', false );
+
+  if ( screen && screen.getVideoTracks().length ) {
+      startRecording( screen );
+  }
+
+  else {
+      h.shareScreen().then( ( screenStream ) => {
+          startRecording( screenStream );
+      } ).catch( () => { } );
+  }
+} );
+
+
+//When user choose to record own video
+document.getElementById( 'record-video' ).addEventListener( 'click', () => {
+  h.toggleModal( 'recording-options-modal', false );
+
+  if ( myStream && myStream.getTracks().length ) {
+      startRecording( myStream );
+  }
+
+  else {
+      h.getUserFullMedia().then( ( videoStream ) => {
+          startRecording( videoStream );
+      } ).catch( () => { } );
+  }
+}) 
+
+
+function toggleRecordingIcons( isRecording ) {
+  let e = document.getElementById( 'record' );
+
+  if ( isRecording ) {
+      e.setAttribute( 'title', 'Stop recording' );
+      e.children[0].classList.add( 'text-danger' );
+      e.children[0].classList.remove( 'text-white' );
+  }
+
+  else {
+      e.setAttribute( 'title', 'Record' );
+      e.children[0].classList.add( 'text-white' );
+      e.children[0].classList.remove( 'text-danger' );
+  }
+}
+
+
+function startRecording( stream ) {
+  mediaRecorder = new MediaRecorder( stream, {
+      mimeType: 'video/webm;codecs=vp9'
+  } );
+
+  mediaRecorder.start( 1000 );
+  toggleRecordingIcons( true );
+
+  mediaRecorder.ondataavailable = function ( e ) {
+      recordedStream.push( e.data );
+  };
+
+  mediaRecorder.onstop = function () {
+      toggleRecordingIcons( false );
+
+      h.saveRecordedStream( recordedStream, username );
+
+      setTimeout( () => {
+          recordedStream = [];
+      }, 3000 );
+  };
+
+  mediaRecorder.onerror = function ( e ) {
+      console.error( e );
+  };
+}
+
+const recordingBtn = document.getElementById("recording-toggle");
+const chunks = [];
+var recorder;
+recordingBtn.addEventListener("click", (e) => {
+    const currentElement = e.target;
+    const indicator = document.querySelector(".recording-indicator");
+
+    // recording start
+    if (indicator == null) {
+        currentElement.setAttribute("tool_tip", "Stop Recording");
+        currentElement.classList.add("tooltip-danger");
+        currentElement.classList.add("blink");
+        const recordingElement = document.createElement("div");
+        recordingElement.classList.add("recording-indicator");
+        recordingElement.innerHTML = `<div></div>`;
+        myVideo.previousSibling.appendChild(recordingElement);
+        // recording
+        record(myVideoStream);
+        recorder.start(1000);
+    }
+    // recording stop
+    else {
+        const completeBlob = new Blob(chunks, { type: chunks[0].type });
+        var anchor = document.createElement("a");
+        document.body.appendChild(anchor);
+        anchor.style = "display: none";
+        var url = window.URL.createObjectURL(completeBlob);
+        anchor.href = url;
+        anchor.download = `aaaa.mp4`;
+        anchor.click();
+        window.URL.revokeObjectURL(url);
+        recorder.stop();
+        currentElement.setAttribute("tool_tip", "Start Recording");
+        currentElement.classList.remove("tooltip-danger");
+        currentElement.classList.remove("blink");
+        indicator.remove();
+        while (chunks.length) {
+            chunks.pop();
+        }
+    }
+});
+
+const record = (stream) => {
+    recorder = new MediaRecorder(stream, {
+        mineType: "video/webm;codecs=H264",
+    });
+    recorder.onstop = (e) => {
+        delete recorder;
+    };
+    recorder.ondataavailable = (e) => {
+        chunks.push(e.data);
+    };
+};
+
+//raise hand
+
+const raiseHand = document.getElementById("raiseHand");
+  raiseHand.addEventListener("click", (e) => {
+  //emit through socket when button is clicked
+  socket.emit('raise-hand');                                               
+});
+
+
+//listening for raiseHand event
+socket.on('raiseHand', username =>{                  
+    $('ul').append(`<li class="message"><b>${username}</b><br/>:✋</li>`)
+});
+
+//exit button 
+
+const exitButton = document.querySelector('.main__exit_button');
+
+exitButton.addEventListener("click", (e) => {
+  //window.close();
+  //process.exit()
+  //open(location, '_self').close();
+  if(confirm("Are you sure?")){
+  var win = window.open("leave.html", "_self");
+  win.close();
+  }
+});

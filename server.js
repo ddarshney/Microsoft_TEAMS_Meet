@@ -19,15 +19,24 @@ app.use('/peerjs', peerServer);
 app.set('view engine', 'ejs')
 app.use(express.static('public'))
 
-app.get('/', (req, res) => {
-  res.redirect(`/${uuidV4()}`)
-});
 
 app.get('/:room', (req, res) => {
   res.render('room', { roomId: req.params.room })
 });
 
+app.get('/', (req, res) => {
+  res.redirect(`/${uuidV4()}`)
+});
+
+const users = {};
+
 io.on('connection', socket => {
+
+  // Storing the name of user
+  socket.on('new-user', userName =>{
+    users[socket.id] = userName;
+  });
+
   socket.on('join-room', (roomId, userId) => {
     socket.join(roomId);
     socket.to(roomId).emit('user-connected', userId);
@@ -39,11 +48,17 @@ io.on('connection', socket => {
         io.to(roomId).emit('createmsg', msg,name)
     })
 
+    socket.on('raise-hand', () => {
+      //send raised hand emoji to the same room
+      io.to(roomId).emit('raiseHand', username)
+    });
+
     socket.on('disconnect', () => {
       socket.to(roomId).emit('user-disconnected', userId)
     });
   });
 });
+
 
 server.listen( process.env.PORT || 8569);
 
