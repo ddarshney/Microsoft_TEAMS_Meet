@@ -8,7 +8,7 @@ const videoGrid = document.getElementById('video-grid')
 var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '8569',
+  port: '443',
 })
 
 var username= prompt("Please enter your name....","user");
