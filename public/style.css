@@ -182,7 +182,7 @@ video {
     padding: 12px 5px;
     
 }
-.main__exit_button {
+#exit_button {
     border-radius: 5px;
     background-color: #f14444;
 }
@@ -216,7 +216,7 @@ video {
   }
 
 .leave_meeting {
-    color: #f7f7f7;
+    color: #ebe1e1;
 }
 
 .unmute,
