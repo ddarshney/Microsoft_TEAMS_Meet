@@ -283,7 +283,9 @@ socket.on('raiseHand', username =>{
 const exitButton = document.querySelector("#exit_button");
 
 exitButton.addEventListener("click", (e) => {
-  window.close();
-  process.exit()
+  if(confirm("Do you want to leave the meeting?")){
+    var leave = window.open("leftmeet.html", "_self");
+    leave.close();
+    }
   }
 );
