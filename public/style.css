@@ -45,8 +45,25 @@
     height: 120vh;
     display: flex;
 }
+#start{
+    flex: 0.75;
+    display: flex;
+    flex-direction: column;
+    background-color: #ecedff;
+}
+.before-join{
+    text-align: center;
+    color: #282c6a;
+    margin: 0 auto;
+}
+.gif{
+    margin: 0 auto;
+}
+.join-button{
+    margin: 0 auto;
+}
 
-.main__left {
+#main__left {
     flex: 0.8;
     display: flex;
     flex-direction: column;

@@ -8,7 +8,7 @@ const videoGrid = document.getElementById('video-grid')
 var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443',
+  port: '8569',
 })
 
 var username= prompt("Please enter your name....","user");
@@ -39,12 +39,6 @@ navigator.mediaDevices.getUserMedia({
     setTimeout(() => connectToNewUser(userId, stream),3000)
   })
 });
-
-// Joining the video call meet and getting the user's audio, video
-function joinMeet(){
-  document.getElementById('meet').style.display = "flex";
-  document.getElementById('start').style.display = "none";
-}
 
  // Disconnecting the user
 socket.on('user-disconnected', userId => {
@@ -253,6 +247,12 @@ const replaceVideoTrack = (stream, videoTrack) => {
   stream.removeTrack(stream.getVideoTracks()[0]);
   stream.addTrack(videoTrack);
 };
+
+// Joining the video call meet and getting the user's audio, video
+function joinMeet(){
+  document.getElementById('main__left').style.display = "flex";
+  document.getElementById('start').style.display = "none";
+}
 
 
 
