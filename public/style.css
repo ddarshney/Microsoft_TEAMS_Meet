@@ -1,4 +1,5 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap");
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
 
 :root {
     --main-darklg: #1d2635;
@@ -32,7 +33,8 @@
     height: 8vh;
     position: relative;
     width: 100%;
-    background-color:rgb(109, 40, 187) ;
+    background-color:rgb(69, 4, 143) ;
+    text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
 }
 
 .logo>h3 {
@@ -45,23 +47,6 @@
     height: 120vh;
     display: flex;
 }
-#start{
-    flex: 0.75;
-    display: flex;
-    flex-direction: column;
-    background-color: #ecedff;
-}
-.before-join{
-    text-align: center;
-    color: #282c6a;
-    margin: 0 auto;
-}
-.gif{
-    margin: 0 auto;
-}
-.join-button{
-    margin: 0 auto;
-}
 
 #main__left {
     flex: 0.8;
@@ -69,7 +54,7 @@
     flex-direction: column;
 }
 
-.videos__grid {
+#videos__grid {
     flex-grow: 1;
     display: flex;
     justify-content: center;
@@ -93,7 +78,7 @@ video {
 
 .main__videos {
     flex-grow: 1;
-    background-color: #aebff7;
+    background-image: linear-gradient(to right, rgba(255,0,0,0), rgb(130, 59, 223));
     display: flex;
     justify-content: center;
     align-items: center;
@@ -103,14 +88,14 @@ video {
 .main__controls {
     padding: 0.5rem;
     display: flex;
-    background-color:rgb(107, 38, 185) ;
+    background-color:rgb(88, 18, 168) ;
 }
 
 .main__right {
     display: flex;
     flex-direction: column;
     flex: 0.3;
-    background-color: #155bf1;
+    background-color: #e2584e;
 }
 
 
@@ -151,14 +136,15 @@ video {
 
 .main__header {
     padding-top: 20px;
-    color: #F5F5F5;
+    color: white;
+    text-shadow: 1px 1px 2px black, 0 0 25px blue, 0 0 5px darkblue;
     text-align: center;
 }
 
 .main__chat_window {
     flex-grow: 1;
     overflow-y: auto;
-    background-color: #71adfc;
+    background-color: #6dbdec;
 }
 
 .messages {
@@ -168,9 +154,30 @@ video {
     list-style: none;
 }
 
-.main__message_container {
-    padding: 16px 12px;
+.message {
     display: flex;
+    flex-direction: column;
+  }
+  
+  .message > b {
+    color: #201d1d;
+    display: flex;
+    align-items: center;
+    text-transform: capitalize;
+  }
+
+  .message > span {
+    background-color: #83a7dd;
+    margin: 0 0;
+    padding: 0.6rem;
+    border-radius: 0.6px;
+  }
+
+.main__message_container {
+    padding: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
 }
 

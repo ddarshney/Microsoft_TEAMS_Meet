@@ -42,18 +42,19 @@ io.on('connection', socket => {
     socket.to(roomId).emit('user-connected', userId);
     // messages
     
-      //send message to the same room
+      //send message to the same room from one user to other
+
      
-      socket.on('message', (msg,name) => {
-        io.to(roomId).emit('createmsg', msg,name)
+      socket.on('message', (msg,username) => {
+        io.to(roomId).emit('createmsg', msg,username)
     })
 
-    socket.on('raise-hand', () => {
-      //send raised hand emoji to the same room
-      io.to(roomId).emit('raiseHand', username)
+    socket.on('raise-hand', (username) => {
+      //raise hand emoji for the person in the same room
+      io.to(roomId).emit('raiseHand',username)
     });
     
-
+      // Disconnectiong the user
     socket.on('disconnect', () => {
       socket.to(roomId).emit('user-disconnected', userId)
     });

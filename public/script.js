@@ -11,14 +11,18 @@ var myPeer = new Peer(undefined, {
   port: '443',
 })
 
-var username= prompt("Please enter your name....","user");
+var username = prompt("Please enter your name....","user");
 socket.emit('new-user', username)
 //user is prompted to give hs name
 // getting the name of user so that it can be used in chat
+myPeer.on('open', id => {
+  socket.emit('join-room', ROOM_ID, id)
+})
 
 let myVideoStream;
 const myVideo = document.createElement('video')
 myVideo.muted = true;
+
 
 const peers = {}
 navigator.mediaDevices.getUserMedia({
@@ -45,9 +49,6 @@ socket.on('user-disconnected', userId => {
   if (peers[userId]) peers[userId].close()
 })
 
-myPeer.on('open', id => {
-  socket.emit('join-room', ROOM_ID, id)
-})
 
 
 //Connecting the user to videocall meet
@@ -85,10 +86,17 @@ $('html').keydown((e)=> {
             // resetting the text typed to blank
         }
 })
+// working of the send button widget
+send.addEventListener("click", (e) => {
+  if (text.val().length!== 0) {
+    socket.emit('message', text.val(), username) ;
+            text.val('') 
+          }
+});
   
 // adding the message on chat window with the name of sender
  socket.on('createmsg', (msg,username)=> {
-        $('ul').append(`<li class="message"><b>${username}</b><br/>${msg}</li>`)
+        $('ul').append(`<div class="message"><b><i class="far fa-user-circle"></i><span>${username}</span></b><span>${msg}</span><br/></div>`)
         scrollbottom() ;  // to scroll till last msg in chat window
     })
      
@@ -247,39 +255,21 @@ const replaceVideoTrack = (stream, videoTrack) => {
   stream.removeTrack(stream.getVideoTracks()[0]);
   stream.addTrack(videoTrack);
 };
-
-// Joining the video call meet and getting the user's audio, video
-function joinMeet(){
-  document.getElementById('main__left').style.display = "flex";
-  document.getElementById('start').style.display = "none";
-}
-
-
-
-// Leaving the videocall meet
-function leave(){
-  document.getElementById('meet').style.display = "none";
-  document.getElementById('start').style.display = "flex";
-  localStream.getAudioTracks()[0].enabled = false;
-  localStream.getVideoTracks()[0].enabled = false;
-  stream.removeTrack(stream.getVideoTracks()[0]);
-}       
-
-
-//raise hand
+  
+//raise hand feature
 const raiseHand = document.getElementById("raiseHand");
   raiseHand.addEventListener("click", (e) => {
   //emit through socket when button is clicked
-  socket.emit('raise-hand');                                               
+  socket.emit('raise-hand',username);                                               
 });
 
 
 //listening for raiseHand event
 socket.on('raiseHand', username =>{                  
-    $('ul').append(`<li class="message"><b>${username}</b><br/>:✋</li>`)
+    $('ul').append(`<div class="message"><b>${username}</b>:✋</div><br/>`)
 });
 
-//when exit button is clicked 
+//when hang up button is clicked 
 const exitButton = document.querySelector("#exit_button");
 
 exitButton.addEventListener("click", (e) => {
