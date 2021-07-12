@@ -56,7 +56,7 @@ io.on('connection', socket => {
     
       // Disconnectiong the user
     socket.on('disconnect', () => {
-      socket.to(roomId).emit('user-disconnected', userId, username)
+      socket.to(roomId).emit('user-disconnected', userId)
     });
   });
 });
