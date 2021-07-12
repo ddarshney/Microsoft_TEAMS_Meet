@@ -2,61 +2,14 @@
 
 A video conference Web Application made during the Microsoft Engage Mentorship Programme 2021 that offer you to have a multi-user video conversation using WebRTC and Socket.io.
 
-
+<img src = "https://www.businessinsider.in/photo/80131632/How-to-use-custom-background-in-Google-Meet-Zoom-and-Microsoft-Teams.jpg?imgsize=155990" >
 
 # Features 💿⭐
-<ul><li>Gifs</li><li>Social Icons</li><li>Skill Icons</li><li>Visitors Badge</li><li>Github Stats</li><li>WakaTime Stats</li><li>.yml file to display Blog Posts from your feed</li><li>Ability to add image banners at beginning of README</li>
-<li>Random Jokes Card</li></ul>
+<ul><li>Multi-user video call</li><li>Group chat feature using socket.io</li><li>Screen share</li><li>Video/Audio toggling</li><li>Raise hand feature  in conversation</li><li>Timings in chat</li>
+<li>Notification when the user leaves or join the meeting</li></ul>
 
 ## 📕 Agile methodology used :
 
-
-## Getting Started
-
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
-
-### Prerequisites
-
-You have to install [Node.js](https://nodejs.org/en/) in your machine.
-
-### Installing
-
-After installing node clone the repo by using git
-
-```
-git clone https://github.com/ddarshney/Microsoft_TEAMS_Meet.git
-       
-```
-Or you can also download the zip file.
-
-Then open cmd or git bash on the project folder to install some modules that I used to build this project
-
-Install Once
-
-```
-npm install
-```
-
-[Nodemon](https://www.npmjs.com/package/nodemon) For automatically restart the server as a dev dependency (optional)
-
-```
-npm i --sav-dev nodemon
-```
-
-
-## Running the App
-
-If you install nodemon the you can use. (devStart script is already added to the package.json)
-
-```
-npm run devStart
-```
-
-or
-
-```
-node server.js
-```
 
 ## Live Demo 🌞
 
@@ -90,20 +43,54 @@ The article contains resources for gifs, royalty free images/icons and tutorials
 - 
 
 # Running Locally 🖥️
-- Clone the Repo
-- Create Virtual Environment
-``` python -m venv venv``` 
-- Activate the virtual Environment
- ``` venv/Scripts/activate ```
-- Install required dependencies
-``` pip install -r requirements.txt```
-- Run the App 
-```streamlit run __init__.py```
+These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+You have to install [Node.js](https://nodejs.org/en/) in your machine.
+
+After installing node clone the repo by using git
+
+```
+git clone https://github.com/ddarshney/Microsoft_TEAMS_Meet.git
+       
+```
+Or you can also download the zip file.
+
+Then open cmd or git bash on the project folder to install some modules that I used to build this project
+
+Install Once
+
+```
+npm install
+```
+
+[Nodemon](https://www.npmjs.com/package/nodemon) For automatically restart the server as a dev dependency (optional)
+
+```
+npm i --sav-dev nodemon
+```
+
+If you install nodemon the you can use. (devStart script is already added to the package.json)
+
+```
+npm run devStart
+```
+or
+```
+node server.js
+```
+
+- Run the App on 
+```localhost:8569```
+
+# Plans for future release 📆
+- Adding authentication
+- Adding more features like record screen
+- Giving admin  ability to mute/ remove other participants.
+- Customizing chat feature.
 
 # Contributors ✨
 - <a href= 'https://github.com/ddarshney'> Dibya Darshney</a> - darshneyd@gmail.com
 
-# Feature Suggestion 💎
+# Feature Suggestion 💎🌠
 - Create an Issue explaining the Feature
 
 # Contributing 🤝
@@ -113,30 +100,9 @@ The article contains resources for gifs, royalty free images/icons and tutorials
 - Commit your Changes ```git commit -m 'Add some AmazingFeature'```
 - Push to the Branch ```git push origin feature/AmazingFeature```
 - Open a Pull Request
-- After your PR is merged, I will add you as a contributor :)
-- If you wish to add yourself to 'Users who used this app' list, simply fork the repo, update the README and make a PR.
-- Follow the below format
-``` 
-- <a href = 'Your Github URL'> Your Name </a>
-```
-- Or just reach out to me on Twitter/LinkedIn and I'll add you :)
 
 # Issues  🔓
 If you find any errors/issues, feel free to create an Issue
 
-# Plans for future release 📆
-- Adding more badges
-- Giving user ability to chose between different ReadMe designs
-- Increasing Number of social Icons
 
-# Users who used this app to generate a README 🌠
-- <a href = 'https://github.com/rahulbanerjee26'> Rahul Banerjee </a>
-- <a href = 'https://github.com/saminul'> Saminul Islam </a>
-- <a href ='https://github.com/sksaikia'> Sourav Kr. Saikia </a>
-- <a href ='https://github.com/brandonbartram98'> Brandon Bartram </a>
 
-# License ⚖️
-- Distributed under the ```MIT License```. See LICENSE for more information.
-
-# Resources
-- https://metrics.lecoq.io/
