@@ -17,7 +17,7 @@ socket.emit('new-user', username)
 // getting the name of user so that it can be used in chat room
 
 myPeer.on('open', id => {
-  socket.emit('join-room', ROOM_ID, id)
+  socket.emit('join-room', ROOM_ID, id, username)
 })
 
 let myVideoStream;

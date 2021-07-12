@@ -37,7 +37,7 @@ io.on('connection', socket => {
     users[socket.id] = username;
   });
 
-  socket.on('join-room', (roomId, userId) => {
+  socket.on('join-room', (roomId, userId, username) => {
     
     socket.join(roomId);
     socket.to(roomId).emit('user-connected', userId, username);
