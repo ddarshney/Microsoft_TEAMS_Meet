@@ -1,6 +1,6 @@
-# Microsoft_TEAMS_Meet 💯
+# Microsoft_Teams_Meet : Let's Connect 💯
 
-A video conference Web Application made during the Microsoft Engage Mentorship Programme 2021 that offer you to have a multi-user video conversation using WebRTC and Socket.io.
+A Microsoft Teams Meet clone Web Application made during the Microsoft Engage Mentorship Programme 2021 that offer you to have a Multi-user video conversation and Group Chat using WebRTC and Socket.io.
 
 <img src = "https://www.businessinsider.in/photo/80131632/How-to-use-custom-background-in-Google-Meet-Zoom-and-Microsoft-Teams.jpg?imgsize=155990" >
 
@@ -9,6 +9,13 @@ A video conference Web Application made during the Microsoft Engage Mentorship P
 <li>Notification when the user leaves or join the meeting</li></ul>
 
 ## 📕 Agile methodology used :
+
+-   [Node Js](https://nodejs.org/en/) - The Backend
+-   [Peer JS](https://peerjs.com/) - PeerJS simplifies WebRTC peer-to-peer data, video, and audio calls.
+-   [SocketIo](https://socket.io/) - For realtime communication
+-   [NPM](https://www.npmjs.com/) - Dependency Management
+-   [GIT](https://git-scm.com/) - Used for version control
+-   [Heroku](https://heroku.com) - Used to Deploy Node.js applications
 
 
 ## Live Demo 🌞
