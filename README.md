@@ -9,8 +9,14 @@ A Microsoft Teams Meet clone Web Application made during the Microsoft Engage Me
 <li>Notification when the user leaves or join the meeting</li></ul>
 
 ## 📕 Agile methodology used :
+ I have used Agile methodology to build my prototype. <br>
+ Each iteration consists of two- to four-week sprints, where each sprint’s goal is to build the most important features first and come out with a potentially deliverable       product. More features are built into the product in subsequent sprints and are adjusted based on stakeholder and customer feedback between sprints.
+ Agile development methodology is a concept that includes different techniques that provide the ability to adapt quickly to new conditions.
 
--   [Node Js](https://nodejs.org/en/) - The Backend
+-    Research on the resources to be followed in a time -bound manner.
+     Made a basic low-level design of the product.
+     Learning some web development technologies- JavaScript NodeJS, read about Web RTC and Socket.io to implement real time communication btw 2 users.
+     Learning about WebRTC — an open-source framework providing web browsers and mobile applications with real-time communication via simple APIs.
 -   [Peer JS](https://peerjs.com/) - PeerJS simplifies WebRTC peer-to-peer data, video, and audio calls.
 -   [SocketIo](https://socket.io/) - For realtime communication
 -   [NPM](https://www.npmjs.com/) - Dependency Management
