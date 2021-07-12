@@ -40,7 +40,7 @@ navigator.mediaDevices.getUserMedia({
     })
   })
 
-  socket.on('user-connected', (userId) => {
+  socket.on('user-connected', (userId, username) => {
     setTimeout(() => connectToNewUser(userId, stream),3000)
 
     $("ul").append(`<br><h6 style="color: blue"><li class="message">
@@ -53,7 +53,7 @@ navigator.mediaDevices.getUserMedia({
 });
 
  // Disconnecting the user
-socket.on('user-disconnected', userId => {
+socket.on('user-disconnected', ( userId, username) => {
   if (peers[userId]) 
   {
    $("ul").append(`<br><h6 style="color: #b31b1b;">
