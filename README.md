@@ -98,10 +98,15 @@ node server.js
 
 # Plans for future release 📆
 - Adding authentication
-- Adding more features like record screen
-- Participant list
-- Giving admin  ability to mute/ remove other participants.
-- Customizing chat feature.
+- Keeping chat window active before and after the video meeting
+- Adding a whiteboard for collaborative editing.
+- Continue the group chat before and after the meeting using pre-built APIs. 
+- Automatic text wrapping in chat messages.
+- Adding more features like record screen.
+- Adding and saving Participant list.
+- Giving admin ability to mute/ remove other participants.
+- Customizing chat feature- Adding emoticons in chat messages.
+
 
 # Contributors ✨
 - <a href= 'https://github.com/ddarshney'> Dibya Darshney</a> - darshneyd@gmail.com
