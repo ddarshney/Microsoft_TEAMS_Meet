@@ -37,16 +37,16 @@ io.on('connection', socket => {
     users[socket.id] = username;
   });
 
-  socket.on('join-room', (roomId, userId, username) => {
+  socket.on('join-room', (roomId, userId) => {
     socket.join(roomId);
-    socket.to(roomId).emit('user-connected', userId, username);
+    socket.to(roomId).emit('user-connected', userId);
     // messages
     
       //send message to the same room from one user to other
 
      
-      socket.on('message', (msg,username,time) => {
-        io.to(roomId).emit('createmsg', msg,username,time)
+      socket.on('message', (msg,username) => {
+        io.to(roomId).emit('createmsg', msg,username)
     })
 
     socket.on('raise-hand', (username) => {
