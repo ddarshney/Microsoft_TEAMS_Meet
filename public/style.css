@@ -167,9 +167,9 @@ video {
   }
 
   .message > span {
-    background-color: #83a7dd;
+    background-color: #5193f5;
     margin: 0 0;
-    padding: 0.6rem;
+    padding: 0.3rem;
     border-radius: 0.6px;
   }
 
@@ -208,7 +208,16 @@ video {
     left: 28px;
     color: #fff;
 }
+.zoom-video {
+    position: absolute;
+    z-index: 4;
+    width: 100%;
+    left: 0;
+    height: calc(100vh - var(--footer-height));
+    background-color: rgba(var(--color4), 1);
+    transition: all 0.24s linear;
 
+}
 .options__button {
     display: flex;
     justify-content: center;

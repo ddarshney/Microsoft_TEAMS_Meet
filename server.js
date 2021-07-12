@@ -33,20 +33,20 @@ const users = {};
 io.on('connection', socket => {
 
   // Storing the name of user
-  socket.on('new-user', userName =>{
-    users[socket.id] = userName;
+  socket.on('new-user', username =>{
+    users[socket.id] = username;
   });
 
-  socket.on('join-room', (roomId, userId) => {
+  socket.on('join-room', (roomId, userId, username) => {
     socket.join(roomId);
-    socket.to(roomId).emit('user-connected', userId);
+    socket.to(roomId).emit('user-connected', userId, username);
     // messages
     
       //send message to the same room from one user to other
 
      
-      socket.on('message', (msg,username) => {
-        io.to(roomId).emit('createmsg', msg,username)
+      socket.on('message', (msg,username,time) => {
+        io.to(roomId).emit('createmsg', msg,username,time)
     })
 
     socket.on('raise-hand', (username) => {
@@ -56,7 +56,7 @@ io.on('connection', socket => {
     
       // Disconnectiong the user
     socket.on('disconnect', () => {
-      socket.to(roomId).emit('user-disconnected', userId)
+      socket.to(roomId).emit('user-disconnected', userId, username)
     });
   });
 });

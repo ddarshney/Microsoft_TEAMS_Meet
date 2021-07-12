@@ -8,13 +8,14 @@ const videoGrid = document.getElementById('video-grid')
 var myPeer = new Peer(undefined, {
   path: '/peerjs',
   host: '/',
-  port: '443',
+  port: '8569',
 })
 
 var username = prompt("Please enter your name....","user");
 socket.emit('new-user', username)
 //user is prompted to give hs name
-// getting the name of user so that it can be used in chat
+// getting the name of user so that it can be used in chat room
+
 myPeer.on('open', id => {
   socket.emit('join-room', ROOM_ID, id)
 })
@@ -39,14 +40,28 @@ navigator.mediaDevices.getUserMedia({
     })
   })
 
-  socket.on('user-connected', userId => {
+  socket.on('user-connected', (userId) => {
     setTimeout(() => connectToNewUser(userId, stream),3000)
+
+    $("ul").append(`<br><h6 style="color: blue"><li class="message">
+    <b>${username}</b> has joined the call</li></h6><br>`);
+
+    scrollToBottom()
+
   })
+
 });
 
  // Disconnecting the user
 socket.on('user-disconnected', userId => {
-  if (peers[userId]) peers[userId].close()
+  if (peers[userId]) 
+  {
+   $("ul").append(`<br><h6 style="color: #b31b1b;">
+   <li class="message"><b>${username}</b> has left the call</li></h6><br>`);
+   scrollToBottom()
+   peers[userId].close()
+  }
+
 })
 
 
@@ -86,6 +101,8 @@ $('html').keydown((e)=> {
             // resetting the text typed to blank
         }
 })
+
+const time = new Date();
 // working of the send button widget
 send.addEventListener("click", (e) => {
   if (text.val().length!== 0) {
@@ -96,7 +113,8 @@ send.addEventListener("click", (e) => {
   
 // adding the message on chat window with the name of sender
  socket.on('createmsg', (msg,username)=> {
-        $('ul').append(`<div class="message"><b><i class="far fa-user-circle"></i><span>${username}</span></b><span>${msg}</span><br/></div>`)
+        $('ul').append(`<div class="message"><b><i class="far fa-user-circle"></i><span>${username}</span></b><span>${msg}</span><span class="time">${time.toLocaleString(
+          "en-US", { hour: "numeric", minute: "numeric", hour12: true })}</span><br/></div>`)
         scrollbottom() ;  // to scroll till last msg in chat window
     })
      
@@ -104,7 +122,6 @@ send.addEventListener("click", (e) => {
 const scrollbottom=() => {
     let d= $('.chat_window') ;
     d.scrollTop(d.prop("scrollHeight")) ;
-
 }
 
 // Setting the functions of mute or unmute audio buttons when mute button is clicked
