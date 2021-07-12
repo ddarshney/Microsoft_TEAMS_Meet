@@ -111,13 +111,13 @@ node server.js
 # Contributors ✨
 - <a href= 'https://github.com/ddarshney'> Dibya Darshney</a> - darshneyd@gmail.com
 
-# Feature Suggestion 💎🌠
-- Create an Issue explaining the Feature
-
 # Special thanks to my Mentors for their valuable feedback and inputs✨
 
  - gauravsehgal@microsoft.com
  - Harshit.Sharma@microsoft.com
+
+# Feature Suggestion 💎🌠
+- Create an Issue explaining the Feature
 
 # Contributing 🤝
 - Fork the Project
