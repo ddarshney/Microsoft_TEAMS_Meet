@@ -15,16 +15,16 @@ A Microsoft Teams Meet clone Web Application made during the Microsoft Engage Me
  
  The whole mentorship program was divided into 4 sprints of 1 week duration.
 
--    **Week 1: Research and Design**
+-    **�⭐Week 1: Research and Design**
      Research on the resources to be followed in a time -bound manner.
      Made a basic low-level design of the product I ideated.
      Learning some web development technologies- JavaScript NodeJS, read about Web RTC and Socket.io to implement real time communication btw 2 users.
      Learning about WebRTC — an open-source framework providing web browsers and mobile applications with real-time communication via simple APIs.
--    **Week 2: Build phase**
+-    **�⭐Week 2: Build phase**
      Working on the mandatory feature of the project that is to make video call with peers. I used WebRTC Peer to peer library, Nodejs, Socket.io, Express.
      reating a unique room in the server. I have used uuid library to create a random unique URL for each room. UUID is a javascript library that
      allows us to create unique Ids. I have used PeerJS library that simplifies WebRTC peer-to-peer data, video, and audio calls. PeerJS uses PeerServer for session metadata    and candidate signaling.
--   **Week 3: Additional features and deployment** - Adding a prompt to take custom custom
+-   **�⭐Week 3: Additional features and deployment** - Adding a prompt to take custom custom
 user names and map it with the user id.
 Share Screen functionality while streaming
 by the user on the server.
@@ -34,7 +34,7 @@ the participant leaves the meeting.
 Also added a join new meeting button if the
 left participant wants to start the new
 meeting.
--   **Week 4: Adapt phase**  Added the text messaging facility with other members in the same room ,
+-   **�⭐Week 4: Adapt phase**  Added the text messaging facility with other members in the same room ,
 with the custom username being the display name - kind of a basic chat
 application facility using socket.io. I added the notification facility when the user joins/leaves and raise hand feature.
 
@@ -96,6 +96,7 @@ node server.js
 # Plans for future release 📆
 - Adding authentication
 - Adding more features like record screen
+- Participant list
 - Giving admin  ability to mute/ remove other participants.
 - Customizing chat feature.
 
@@ -104,6 +105,11 @@ node server.js
 
 # Feature Suggestion 💎🌠
 - Create an Issue explaining the Feature
+
+# Special thanks to my Mentors for their valuable feedback and inputs✨
+
+ - gauravsehgal@microsoft.com
+ - Harshit.Sharma@microsoft.com
 
 # Contributing 🤝
 - Fork the Project
