@@ -59,7 +59,7 @@ node server.js
 For deploy the project I use [heroku](https://heroku.com)
 
 [Microsoft Meet Clone](https://microsoft-teams-meet.herokuapp.com)
-## Built With
+## <i class="fa fa-gear fa-spin fa-2x" style="color: firebrick"></i>Tech Stack used: 
 
 -   [Node Js](https://nodejs.org/en/) - The Backend
 -   [Peer JS](https://peerjs.com/) - PeerJS simplifies WebRTC peer-to-peer data, video, and audio calls.
