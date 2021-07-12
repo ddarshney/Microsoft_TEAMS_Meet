@@ -1,6 +1,6 @@
-# Microsoft_Teams_Meet : Let's Connect 💯
+# Microsoft Teams Meet : Let's Connect 💯
 
-A Microsoft Teams Meet clone Web Application made during the Microsoft Engage Mentorship Programme 2021 that offer you to have a Multi-user video conversation and Group Chat using WebRTC and Socket.io.
+A Microsoft Teams Meet clone Web Application made during the **Microsoft Engage Mentorship Programme 2021** that offer you to have a Multi-user video conversation and Group Chat using WebRTC and Socket.io.
 
 <img src = "https://www.businessinsider.in/photo/80131632/How-to-use-custom-background-in-Google-Meet-Zoom-and-Microsoft-Teams.jpg?imgsize=155990" >
 
