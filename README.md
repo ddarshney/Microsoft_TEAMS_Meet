@@ -5,7 +5,7 @@ A Microsoft Teams Meet clone Web Application made during the **Microsoft Engage 
 <img src = "https://www.businessinsider.in/photo/80131632/How-to-use-custom-background-in-Google-Meet-Zoom-and-Microsoft-Teams.jpg?imgsize=155990" >
 
 # Features 💿⭐
-<ul><li>Multi-user video call</li><li>Group chat feature using socket.io</li><li>Screen share</li><li>Video/Audio toggling</li><li>Raise hand feature  in conversation</li><li>Timings in chat</li>
+<ul><li>Multi-user video call</li><li>Group chat feature using socket.io during the Video Meet.</li><li>Screen share</li><li>Video/Audio toggling</li><li>Raise hand feature  in conversation</li><li>Timings in chat</li>
 <li>Notification when the user leaves or join the meeting</li></ul>
 
 ## 📕 Agile methodology used :
