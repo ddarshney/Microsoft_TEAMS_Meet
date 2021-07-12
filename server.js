@@ -38,8 +38,9 @@ io.on('connection', socket => {
   });
 
   socket.on('join-room', (roomId, userId) => {
+    
     socket.join(roomId);
-    socket.to(roomId).emit('user-connected', userId);
+    socket.to(roomId).emit('user-connected', userId, username);
     // messages
     
       //send message to the same room from one user to other
@@ -56,7 +57,7 @@ io.on('connection', socket => {
     
       // Disconnectiong the user
     socket.on('disconnect', () => {
-      socket.to(roomId).emit('user-disconnected', userId)
+      socket.to(roomId).emit('user-disconnected', userId, username)
     });
   });
 });
