@@ -1,7 +1,11 @@
 # Microsoft_TEAMS_Meet
 
 
-A Web Application made during the Microsoft Engage Mentorship Programme that offer you to have a multi-user video conversation using WebRTC and Socket.io.
+A video conference Web Application made during the Microsoft Engage Mentorship Programme 2021 that offer you to have a multi-user video conversation using WebRTC and Socket.io.
+
+
+## 📕 Agile methodology used :
+
 
 ## Getting Started
 
