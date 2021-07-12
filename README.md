@@ -25,23 +25,6 @@ For deploy the project I use [heroku](https://heroku.com)
 -   [GIT](https://git-scm.com/) - Used for version control
 -   [Heroku](https://heroku.com) - Used to Deploy Node.js applications
 
-
-<img src='https://github.com/rahulbanerjee26/githubProfileReadmeGenerator/blob/main/screencast_ghub_profile_gen_v1.gif' alt='Screencast of Github AboutMe/Profile ReadMe Generator'/>
-
-<h2 align ='center'> A few inputs + ~15 mins = Your Github Profile reaches a new level 🔥 </h2>
-
-
-# Article 📝
-https://www.realpythonproject.com/a-free-tool-to-take-your-github-profile-to-the-next-level/
-
-The article contains resources for gifs, royalty free images/icons and tutorials on how to create your secret repo for the About Me Page, setting up the blog flow action etc.
-
-
-# Built With 🧰
-- <a href= 'https://github.com/python'> Python </a>
-- <a href= 'https://github.com/streamlit'> Streamlit </a>
-- 
-
 # Running Locally 🖥️
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 You have to install [Node.js](https://nodejs.org/en/) in your machine.
