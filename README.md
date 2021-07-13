@@ -47,7 +47,7 @@ application facility using socket.io. I added the notification facility when the
 
 For deploy the project I use [heroku](https://heroku.com)
 
-[Microsoft Meet Clone](https://microsoft-teams-meet.herokuapp.com)
+See the app here:   [Microsoft Meet Clone](https://microsoft-teams-meet.herokuapp.com)
 ## Tools / Web technologies used 🧰: 
 
 -   [Node Js](https://nodejs.org/en/) - The Backend
